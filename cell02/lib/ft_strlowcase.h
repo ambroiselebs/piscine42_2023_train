@@ -1,5 +1,3 @@
-#include "lib/ft_strlen.h"
-
 char *ft_strlowcase(char *str)
 {
     int lenstr = ft_strlen(str);

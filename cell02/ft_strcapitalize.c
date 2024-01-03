@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "lib/ft_strlen.h"
 #include "lib/ft_strupcase.h"
 #include "lib/ft_strlowcase.h"
@@ -12,6 +11,11 @@ char *ft_strcapitalize(char *str)
     {
         if (str[i] >= 'A' && str[i] <= 'Z')
             str[i] += 32;
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+	    write(1, "a", 1);
     }
 
     //Uppercase first letter

@@ -1,5 +1,3 @@
-#include "ft_strlen.h"
-
 int ft_str_is_alpha(char *str)
 {
     int lenstr = ft_strlen(str);
