@@ -28,6 +28,19 @@ void ft_putstr(char *str)
 	for (int i = 0; i < len; i++)
 		write(1, &str[i], 1);
 }
+void ft_reversestr(char *str, int length) {
+    int start = 0;
+    int end = length - 1;
+    while (start < end) {
+        // Swap characters at start and end indices
+        char temp = str[start];
+        str[start] = str[end];
+        str[end] = temp;
+        start++;
+        end--;
+    }
+}
+
 
 void ft_putnbr_base(int nbr, char *base)
 {
@@ -47,50 +60,30 @@ void ft_putnbr_base(int nbr, char *base)
             nbr = nbr / 2;
             i++;
         }
-
-        // Reverse list
-		int bin_len = ft_strlen(bin);
-		int final_i = 0;
-		char final[bin_len];
-
-		for (int i = (bin_len-1); i != -1; i--)
-		{
-			final[final_i] = bin[i];
-			final_i++;
-		}
-		final[final_i] = '\0';
-
+		bin[ft_strlen(bin)+1] = '\0';
+		ft_reversestr(bin, ft_strlen(bin));
+		
         // Print
-    	ft_putstr(final);
+    	ft_putstr(bin);
     }
     // Base Hexa
     if (len == 16)
     {
-		char dec[33];
-		int i = 0;
+		char dec[33]; // Taille suffisante pour contenir le résultat
 
-		while (nbr > 0)
-		{
-			int	remain = nbr % 16;
-			dec[i] = base[remain];
+        int i = 0;
+        while (nbr > 0) {
+            int remain = nbr % 16;
+            dec[i] = base[remain];
+            nbr = nbr / 16;
+            i++;
+        }
 
-			nbr = nbr / 16;
-			i++;
-		}
-		printf("%s", dec);
+        dec[i] = '\0';
+		ft_reversestr(dec, ft_strlen(dec));
 
-		// Reverse list
-		int dec_len = ft_strlen(dec);
-		int final_i = 0;
-		char final[dec_len];
-
-		for (int i = (dec_len-1); i != -1; i--)
-		{
-			final[final_i] = dec[i];
-			final_i++;
-		}
-		final[final_i] = '\0';
-		printf("%s", final);
+        // Afficher la séquence directement sans inversion
+        printf("%s\n", dec);
 	}
     // Base 8
     else if (len == 8)
@@ -101,5 +94,5 @@ void ft_putnbr_base(int nbr, char *base)
 
 int main(void)
 {
-    ft_putnbr_base(45, "0123456789ABCDEF");
+    ft_putnbr_base(45, "01");
 }
