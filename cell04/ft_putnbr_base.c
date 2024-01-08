@@ -29,7 +29,6 @@ void ft_putstr(char *str)
 		write(1, &str[i], 1);
 }
 
-
 void ft_putnbr_base(int nbr, char *base)
 {
     // Get base
@@ -50,31 +49,49 @@ void ft_putnbr_base(int nbr, char *base)
         }
 
         // Reverse list
-        int binlen = ft_strlen(bin);
-        int final_i = 0;
-        char final[binlen];
-        
-        for (int i = (binlen -1); i != -1; i--)
-        {
-            final[final_i] = bin[i];
-            final_i++;
-        }
-        final[final_i] = '\0';
+		int bin_len = ft_strlen(bin);
+		int final_i = 0;
+		char final[bin_len];
+
+		for (int i = (bin_len-1); i != -1; i--)
+		{
+			final[final_i] = bin[i];
+			final_i++;
+		}
+		final[final_i] = '\0';
 
         // Print
-        // ft_putstr(final);
-        
-        // Check if -
-        if (nbr < 0)
-        {
-            
-        }
+    	ft_putstr(final);
     }
     // Base Hexa
-    else if (len == 16)
+    if (len == 16)
     {
-        
-    }
+		char dec[33];
+		int i = 0;
+
+		while (nbr > 0)
+		{
+			int	remain = nbr % 16;
+			dec[i] = base[remain];
+
+			nbr = nbr / 16;
+			i++;
+		}
+		printf("%s", dec);
+
+		// Reverse list
+		int dec_len = ft_strlen(dec);
+		int final_i = 0;
+		char final[dec_len];
+
+		for (int i = (dec_len-1); i != -1; i--)
+		{
+			final[final_i] = dec[i];
+			final_i++;
+		}
+		final[final_i] = '\0';
+		printf("%s", final);
+	}
     // Base 8
     else if (len == 8)
     {
@@ -84,5 +101,5 @@ void ft_putnbr_base(int nbr, char *base)
 
 int main(void)
 {
-    ft_putnbr_base(45, "01");
+    ft_putnbr_base(45, "0123456789ABCDEF");
 }
