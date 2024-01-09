@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdio.h>
 
 int ft_strlen(char *str)
 {
@@ -53,8 +54,8 @@ int ft_atoi(char *str)
             nbr_i++;
         }
 
-        if ((str[i + 1] >= 'a' && str[i + 1] <= 'z') || (str[i+1] >= 'A' && str[i+1] <= 'Z'))
-            break;
+        if (ft_strlen(nbr) > 1 && ((str[i + 1] >= 'a' && str[i + 1] <= 'z') || (str[i+1] >= 'A' && str[i+1] <= 'Z')))
+			break;
     }
 	nbr[nbr_i] = '\0';
 
