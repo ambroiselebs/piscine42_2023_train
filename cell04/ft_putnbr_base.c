@@ -47,6 +47,9 @@ void ft_putnbr_base(int nbr, char *base)
     // Get base
     int len = ft_strlen(base);
 
+	if (len < 2)
+		return;
+		
     // Base 2
     if (len == 2)
     {
@@ -60,7 +63,7 @@ void ft_putnbr_base(int nbr, char *base)
             nbr = nbr / 2;
             i++;
         }
-		bin[ft_strlen(bin)+1] = '\0';
+		bin[i] = '\0';
 		ft_reversestr(bin, ft_strlen(bin));
 		
         // Print
@@ -83,12 +86,27 @@ void ft_putnbr_base(int nbr, char *base)
 		ft_reversestr(dec, ft_strlen(dec));
 
         // Afficher la séquence directement sans inversion
-        printf("%s\n", dec);
+        ft_putstr(dec);
 	}
     // Base 8
     else if (len == 8)
     {
-        
+		char octa[33];
+
+		int i = 0;
+
+		while (nbr > 0)
+		{
+			int remain = nbr % 8;
+			octa[i] = base[remain];
+			nbr = nbr / 8;
+			i++;
+		}
+
+		octa[i] = '\0';
+		ft_reversestr(octa, ft_strlen(octa));
+
+		ft_putstr(octa);
     }
 }
 
