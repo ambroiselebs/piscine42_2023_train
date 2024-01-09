@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <unistd.h>
 
 int ft_strlen(char *str)
@@ -57,37 +56,50 @@ void ft_putnbr_base(int nbr, char *base)
     // Base 2
     if (len == 2)
     {
-        // Convert to base 2
-        char bin[33];
-        int i = 0;
-        
-        while (nbr > 0)
-        {
-            bin[i] = (nbr%2) + '0';
-            nbr = nbr / 2;
-            i++;
-        }
-		bin[i] = '\0';
-		ft_reversestr(bin, ft_strlen(bin));
-		
-        // Print
+		// Convert to base 2
+		char bin[33];
+    	int i = 0;
+
+    	// Gérer le cas du nombre négatif
+    	if (nbr < 0) {
+        	bin[i++] = '-';
+        	nbr = -nbr;
+    	}
+
+    	while (nbr > 0) {
+        	bin[i++] = (nbr % 2) + '0';
+        	nbr = nbr / 2;
+    	}
+    	bin[i] = '\0';
+
+    	// Inverser la chaîne binaire
+    	ft_reversestr(bin + (bin[0] == '-'), ft_strlen(bin + (bin[0] == '-')));
+
+    	// Afficher la chaîne binaire
     	ft_putstr(bin);
-    }
+	}
     // Base Hexa
     if (len == 16)
     {
 		char dec[33]; // Taille suffisante pour contenir le résultat
-
         int i = 0;
+
+		// Gérer le cas du nombre négatif
+    	if (nbr < 0) {
+			dec[i++] = '-';
+        	nbr = -nbr;
+    	}
+
         while (nbr > 0) {
             int remain = nbr % 16;
             dec[i] = base[remain];
             nbr = nbr / 16;
+
             i++;
         }
 
         dec[i] = '\0';
-		ft_reversestr(dec, ft_strlen(dec));
+		ft_reversestr(dec + (dec[0] == '-'), ft_strlen(dec + (dec[0] == '-')));
 
         // Afficher la séquence directement sans inversion
         ft_putstr(dec);
@@ -96,8 +108,13 @@ void ft_putnbr_base(int nbr, char *base)
     else if (len == 8)
     {
 		char octa[33];
-
 		int i = 0;
+
+		// Gérer le cas du nombre négatif
+    	if (nbr < 0) {
+        	octa[i++] = '-';
+        	nbr = -nbr;
+    	}
 
 		while (nbr > 0)
 		{
@@ -108,7 +125,7 @@ void ft_putnbr_base(int nbr, char *base)
 		}
 
 		octa[i] = '\0';
-		ft_reversestr(octa, ft_strlen(octa));
+		ft_reversestr(octa + (octa[0] == '-'), ft_strlen(octa + (octa[0] == '-')));
 
 		ft_putstr(octa);
     }
@@ -116,9 +133,4 @@ void ft_putnbr_base(int nbr, char *base)
 	{
 		ft_putnbr(nbr);
 	}
-}
-
-int main(void)
-{
-    ft_putnbr_base(45, "0123456789");
 }
