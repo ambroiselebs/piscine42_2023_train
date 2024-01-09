@@ -14,12 +14,16 @@ void ft_putchar(char c)
 {
     write(1, &c, 1);
 }
-void ft_putnbr(int nb)
-{
+void ft_putnbr(int nb) {
+    if (nb < 0) {
+        ft_putchar('-');
+        nb = -nb;
+    }
+
     if (nb >= 10)
         ft_putnbr(nb / 10);
-        
-    ft_putchar('0'+nb%10);
+
+    ft_putchar('0' + nb % 10);
 }
 void ft_putstr(char *str)
 {
@@ -108,9 +112,13 @@ void ft_putnbr_base(int nbr, char *base)
 
 		ft_putstr(octa);
     }
+	else
+	{
+		ft_putnbr(nbr);
+	}
 }
 
 int main(void)
 {
-    ft_putnbr_base(45, "01");
+    ft_putnbr_base(45, "0123456789");
 }
